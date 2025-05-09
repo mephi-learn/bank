@@ -1,0 +1,588 @@
+type: collection.insomnia.rest/5.0
+name: Bank
+meta:
+  id: wrk_a576cdb5a70b44439b89cdf60de8223d
+  created: 1745562943525
+  modified: 1745563136887
+collection:
+  - name: Clientds
+    meta:
+      id: fld_af458fad11954053b26b126230668d71
+      created: 1745556429565
+      modified: 1745564290009
+      sortKey: -1745556419036
+    children:
+      - url: http://{{ _.address }}/api/auth/sign-up
+        name: Register Admin User
+        meta:
+          id: req_80691dc2508544b49e6a4cb8e2bab9fd
+          created: 1745556429565
+          modified: 1745581535153
+          isPrivate: false
+          sortKey: -1745305950765
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "admin",
+            	"username": "admin",
+            	"password": "1",
+            	"email": "no@email.net",
+            	"admin": true
+            }
+        parameters:
+          - disabled: true
+            id: pair_a14f14eed3e74e8ca6d359c942570e57
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/auth/sign-up
+        name: Register User
+        meta:
+          id: req_3db5eb12850e4daf96cc4972e5b9467d
+          created: 1745556429566
+          modified: 1746743694951
+          isPrivate: false
+          sortKey: -1745305950665
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "user",
+            	"username": "user",
+            	"password": "1",
+            	"email": "user@email.net",
+            	"admin": false
+            }
+        parameters:
+          - disabled: true
+            id: pair_068c972cb5cc4e589344900def4701a8
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/auth/sign-in
+        name: Login User
+        meta:
+          id: req_a4892743920d4331b0c196e9a248ffc1
+          created: 1745556429567
+          modified: 1745581509166
+          isPrivate: false
+          sortKey: -1745305950565
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"username": "admin",
+            	"password": "1"
+            }
+        parameters:
+          - disabled: true
+            id: pair_8b33437964e242a9a8309a03657275a1
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/admin/auth/list
+        name: List Clients (Admin only)
+        meta:
+          id: req_1638ed30c4284badae37e41437c608f6
+          created: 1746734757867
+          modified: 1746734806846
+          isPrivate: false
+          sortKey: -1745305950465
+        method: GET
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Accounts
+    meta:
+      id: fld_32a463d3be094e0aafce1838eef256a0
+      created: 1745558083419
+      modified: 1746714396282
+      sortKey: -1745556419086
+    children:
+      - url: http://{{ _.address }}/api/account/create
+        name: Create Account
+        meta:
+          id: req_5619626a44294005b2a7bbc90a8a7717
+          created: 1745558201410
+          modified: 1746734083368
+          isPrivate: false
+          sortKey: -1745558226562
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/account/delete/{% prompt 'Идентификатор счёта',
+          'Идентификатор счёта', '', '', false, true %}
+        name: Delete Account
+        meta:
+          id: req_2867b6dc31c345f89265c0b53b21bd68
+          created: 1745558210702
+          modified: 1746734162080
+          isPrivate: false
+          sortKey: -1745558226462
+        method: PUT
+        body:
+          mimeType: application/json
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/account/list
+        name: List Accounts
+        meta:
+          id: req_e7df5db8035040ff857d1cdcf2857439
+          created: 1745563956996
+          modified: 1746737011528
+          isPrivate: false
+          sortKey: -1745558226362
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Cards
+    meta:
+      id: fld_429faf7d489348b0bd472f334ee2165b
+      created: 1746708463166
+      modified: 1746708463166
+      sortKey: -1746708463166
+    children:
+      - url: http://{{ _.address }}/api/card/{% prompt 'Номер счёта', 'Номер счёта', '',
+          '', false, true %}/create
+        name: Create Card
+        meta:
+          id: req_1b5a7b94f3724022a143faeb48eafb7e
+          created: 1746708889560
+          modified: 1746741127383
+          isPrivate: false
+          sortKey: -1746708892559
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/card/delete/{% prompt 'Card ID', 'Card ID', '',
+          '', false, true %}
+        name: Delete Card
+        meta:
+          id: req_2adbc92da21e44e2bbfc7107dbfbba65
+          created: 1746708910319
+          modified: 1746709008835
+          isPrivate: false
+          sortKey: -1746708892459
+        method: PUT
+        body:
+          mimeType: application/json
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/card/list
+        name: List Cards
+        meta:
+          id: req_6746d43f618c46759de2517fb56cfef0
+          created: 1746708921316
+          modified: 1746709046823
+          isPrivate: false
+          sortKey: -1746708892359
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Transactions
+    meta:
+      id: fld_d297de4cf7424f51802b947c82dd6067
+      created: 1746733416640
+      modified: 1746733416640
+      sortKey: -1746733416640
+    children:
+      - url: http://{{ _.address }}/api/transaction/{% prompt 'Номер карты списания',
+          'Номер карты списания', '', '', false, true %}/{% prompt 'Номер карты
+          зачисления', 'Номер карты зачисления', '', '', false, true %}/{%
+          prompt 'Сумма', 'Сумма', '', '', false, true %}
+        name: Card To Card
+        meta:
+          id: req_8d799f8818a04b29ba029c08b0b37f26
+          created: 1746733433709
+          modified: 1746733525492
+          isPrivate: false
+          sortKey: -1746733437721
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/transaction/deposit/{% prompt 'Номер карты
+          зачисления', 'Номер карты зачисления', '', '', false, true %}/{%
+          prompt 'Сумма', 'Сумма', '', '', false, true %}
+        name: Deposit
+        meta:
+          id: req_c1c8f6de706e489b939bf199530c40cd
+          created: 1746734942243
+          modified: 1746734967375
+          isPrivate: false
+          sortKey: -1746721165140
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Accounts (Admin)
+    meta:
+      id: fld_6462fd729a7f47689484d59985f876a4
+      created: 1746734067895
+      modified: 1746734067895
+      sortKey: -1745556419061
+    children:
+      - url: http://{{ _.address }}/api/admin/account/{% prompt 'Идентификатор клиента',
+          'Идентификатор клиента', '', '', false, true %}/create
+        name: Create Account
+        meta:
+          id: req_60fc62a693804050b6dd7559b11a4fa8
+          created: 1746734067896
+          modified: 1746734231331
+          isPrivate: false
+          sortKey: -1745558226562
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/admin/account/{% prompt 'Идентификатор клиента',
+          'Идентификатор клиента', '', '', false, true %}/delete/{% prompt
+          'Идентификатор счёта', 'Идентификатор счёта', '', '', false, true %}
+        name: Delete Account
+        meta:
+          id: req_c18eb2c3c9744ce9ae1ca810517920bb
+          created: 1746734067897
+          modified: 1746734237678
+          isPrivate: false
+          sortKey: -1745558226462
+        method: PUT
+        body:
+          mimeType: application/json
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/admin/account/{% prompt 'Идентификатор клиента',
+          'Идентификатор клиента', '', '', false, true %}/list
+        name: List Accounts
+        meta:
+          id: req_8a50129ce0a24ad18c424974c4968a0c
+          created: 1746734067898
+          modified: 1746745506667
+          isPrivate: false
+          sortKey: -1745558226362
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Cards (Admin)
+    meta:
+      id: fld_b91fb27d926d4aa0a400c9cca8895c92
+      created: 1746735682707
+      modified: 1746735682707
+      sortKey: -1746631002791.5
+    children:
+      - url: http://{{ _.address }}/api/admin/card/{% prompt 'Номер счёта', 'Номер
+          счёта', '', '', false, true %}/create
+        name: Create Card
+        meta:
+          id: req_6ee43c2bfaaa4044ac857a4cbb92ee6c
+          created: 1746735682707
+          modified: 1746735722772
+          isPrivate: false
+          sortKey: -1746708892559
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/admin/card/delete/{% prompt 'Card ID', 'Card
+          ID', '', '', false, true %}
+        name: Delete Card
+        meta:
+          id: req_0f16d2479978416393cd62633e657ff6
+          created: 1746735682708
+          modified: 1746735725436
+          isPrivate: false
+          sortKey: -1746708892459
+        method: PUT
+        body:
+          mimeType: application/json
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://{{ _.address }}/api/admin/card/{% prompt 'Идентификатор клиента',
+          'Идентификатор клиента', '', '', false, true %}/list
+        name: List Cards
+        meta:
+          id: req_6532f1c4042c44479dceb8e91512a4cf
+          created: 1746735682709
+          modified: 1746735991323
+          isPrivate: false
+          sortKey: -1746708892359
+        method: POST
+        parameters:
+          - disabled: false
+            id: pair_6b55ca7976634e54b69922e66fee477f
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_68fe147dbba5b2dcfa2edca7c564b66f05450724
+    created: 1745562943529
+    modified: 1745562943529
+environments:
+  name: Base Environment
+  meta:
+    id: env_68fe147dbba5b2dcfa2edca7c564b66f05450724
+    created: 1745562943527
+    modified: 1746743711319
+    isPrivate: false
+  data:
+    address: localhost:8000
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJuYW1lXCI6XCJhZG1pblwiLFwidXNlcm5hbWVcIjpcImFkbWluXCIsXCJwYXNzd29yZFwiOlwiXCIsXCJlbWFpbFwiOlwibm9AZW1haWwubmV0XCIsXCJhZG1pblwiOnRydWV9IiwiZXhwIjoxNzQ2ODMwMTAyLCJpYXQiOjE3NDY3NDM3MDJ9.hkiFX6Gc6kOG6sg0fYvnTqNQaco6FhtvyoMG5PSpCA0

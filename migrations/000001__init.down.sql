@@ -1,0 +1,4 @@
+DROP INDEX IF EXISTS idx_accounts_client_id;
+DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS clients;
+DROP EXTENSION IF EXISTS pgcrypto;
